@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
-import { Item } from '../../interfaces/item.model';
-import { State } from '../../enums/state.enum';
+import { Item } from '../../../shared/interfaces/item.model';
+import { State } from '../../../shared/enums/state.enum';
 
 @Component({
   selector: 'app-item',
