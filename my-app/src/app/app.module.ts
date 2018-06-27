@@ -9,6 +9,8 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ItemsModule } from './items/items.module';
+import { AppRoutingModule } from './app-routing.module';
+import { Router } from '@angular/router';
 registerLocaleData(localeFr, 'fr');
 @NgModule({
   declarations: [
@@ -16,14 +18,20 @@ registerLocaleData(localeFr, 'fr');
   ],
   imports: [
     BrowserModule,
-    HomeModule,
-    PageNotFoundModule,
     CoreModule,
     SharedModule,
     NgbModule.forRoot(),
-    ItemsModule
+    AppRoutingModule,
+    HomeModule,
+    ItemsModule,
+    PageNotFoundModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  // Diagnostic only: inspect router configuration
+  constructor(router: Router) {
+    console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+  }
+}
