@@ -1,7 +1,7 @@
 import { State } from "../enums/state.enum";
 
-export interface Item {
-  id: string;
+export interface ItemHttp {
+  id: number;
   name: string;
   reference: string;
   state: State;

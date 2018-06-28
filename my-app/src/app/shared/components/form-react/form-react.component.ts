@@ -1,8 +1,8 @@
 import { Component, OnInit, EventEmitter,Output } from '@angular/core';
-import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { State } from '../../enums/state.enum';
 import { Item } from '../../interfaces/item.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DateConvertService } from '../../../core/services/date-convert.service';
 
 @Component({
   selector: 'app-form-react',
@@ -14,8 +14,8 @@ export class FormReactComponent implements OnInit {
   @Output() nItem: EventEmitter<Item> = new EventEmitter<Item>();
   public form: FormGroup;
   constructor(
-    private ngbDateParserFormatter: NgbDateParserFormatter,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dateConvertService: DateConvertService
   ) { }
 
 
@@ -24,14 +24,17 @@ export class FormReactComponent implements OnInit {
   }
 
   public process(): void {
-    this.form.get('birthday').setValue( new Date(this.ngbDateParserFormatter.format(this.form.get('birthday').value)) ) ;
+    this.form.get('birthday').setValue( this.dateConvertService.dateToIso(this.form.get('birthday').value) ) ;
     this.nItem.emit(this.form.value);
     this.form.reset(); // ici facultatif car redirection
     this.form.get('state').setValue(State.ALIVRER); // facultatif car redirection
   }
 
+
   private createForm() {
+    // const date: Date = new Date('Wed Jun 27 2018 02:00:00 GMT+0200');
     this.form = this.fb.group({
+
       name: [
         '',
         Validators.compose([Validators.required, Validators.minLength(5)])
@@ -42,6 +45,11 @@ export class FormReactComponent implements OnInit {
       ],
       state: State.ALIVRER,
       birthday: [
+        // {
+        //   year: date.getFullYear(),
+        //   month: date.getMonth(),
+        //   day: date.getDay()
+        // },
         '',
         Validators.compose([Validators.required, Validators.minLength(10)])
       ],

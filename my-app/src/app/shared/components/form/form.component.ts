@@ -1,7 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { State } from '../../enums/state.enum';
 import { Item } from '../../interfaces/item.model';
-import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { DateConvertService } from '../../../core/services/date-convert.service';
 
 @Component({
   selector: 'app-form',
@@ -14,7 +15,7 @@ export class FormComponent implements OnInit {
   public newItem: Item;
   @Output() nItem: EventEmitter<Item> = new EventEmitter<Item>();
   constructor(
-    private ngbDateParserFormatter: NgbDateParserFormatter
+    private dateConvertService: DateConvertService
   ) { }
 
   ngOnInit() {
@@ -27,12 +28,12 @@ export class FormComponent implements OnInit {
       name: '',
       reference: '',
       state: State.ALIVRER,
-      birthday: new Date()
+      birthday: ''
     }
   }
 
   public process(): void {
-    this.newItem.birthday = new Date(this.ngbDateParserFormatter.format(this.birthday));
+    this.newItem.birthday = this.dateConvertService.dateToIso(this.birthday);
     this.nItem.emit(this.newItem);
     this.init();
   }

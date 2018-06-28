@@ -8,9 +8,13 @@ import { PageNotFoundModule } from './page-not-found/page-not-found.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ItemsModule } from './items/items.module';
 import { AppRoutingModule } from './app-routing.module';
 import { Router } from '@angular/router';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
+import { environment } from '../environments/environment.firebase';
+
 registerLocaleData(localeFr, 'fr');
 @NgModule({
   declarations: [
@@ -23,8 +27,9 @@ registerLocaleData(localeFr, 'fr');
     NgbModule.forRoot(),
     AppRoutingModule,
     HomeModule,
-    ItemsModule,
-    PageNotFoundModule
+    PageNotFoundModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent]

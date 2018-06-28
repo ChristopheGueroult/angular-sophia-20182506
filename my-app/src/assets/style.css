@@ -1,0 +1,41 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?3bm1sy');
+  src:  url('fonts/icomoon.eot?3bm1sy#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?3bm1sy') format('truetype'),
+    url('fonts/icomoon.woff?3bm1sy') format('woff'),
+    url('fonts/icomoon.svg?3bm1sy#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-trash-o:before {
+  content: "\f014";
+}
+.icon-edit:before {
+  content: "\f044";
+}
+.icon-pencil-square-o:before {
+  content: "\f044";
+}
+
+.card-header button {
+  float: right;
+  cursor: pointer;
+  margin-left: 10px;
+}
